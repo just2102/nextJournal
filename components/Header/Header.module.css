@@ -1,0 +1,29 @@
+.header {
+    /* CENTER EVERYTHING, BUT ALSO GAP */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    /* ADD SOME PADDING */
+    padding: 1rem;
+    /* ADD A BORDER */
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+}
+
+.header a {
+    color: #0070f3;
+    text-decoration: none;
+    font-size: large;
+}
+
+.header a:hover {
+
+    text-decoration: underline;
+}
+
+a .active {
+    color: #0070f3;
+    text-decoration: underline;
+}

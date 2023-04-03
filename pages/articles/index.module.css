@@ -1,0 +1,36 @@
+.articles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.articles a {
+    color: #0070f3;
+    text-decoration: none;
+}
+.articles a:hover {
+    text-decoration: underline;
+}
+
+.articleLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    margin: 1rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    padding: 1.5rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    
+}
