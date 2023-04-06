@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styles from "./[id].module.css"
 import ArticleDataType from "@/Types/articleDataType";
+import { articleAPI } from "@/utils/api";
 
 interface Props {
     articleData: ArticleDataType
@@ -26,7 +27,7 @@ const Article = ({articleData}:Props) => {
 
 export const getServerSideProps:GetServerSideProps = async (context) => {
     const {id} = context.query; 
-    const response = await instance.get(`/articles/${id}`);
+    const response = await articleAPI.getArticleByIdRequest(id)
     const articleData = response.data.article;
     return {
         props: {

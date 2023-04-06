@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MyArticle.module.css";
 import MyArticleModal from "./MyArticleModal";
 import { useRouter } from "next/router";
 import { articleAPI } from "@/utils/api";
 
 interface Props {
-  article: any;
+  articleData: any;
 }
 
-const MyArticle = ({ article }: Props) => {
+const MyArticle = ({ articleData }: Props) => {
+  const [article, setArticle] = useState<any>(articleData);
+
   const router = useRouter();
-  const formattedBody = article.body.slice(0, 100);
+  const formattedBody = article?.body.slice(0, 50);
 
   const [isOpen, setIsOpen] = useState(false);
   const onModalClose = () => {
@@ -23,10 +25,21 @@ const MyArticle = ({ article }: Props) => {
   const onDelete = async () => {
     const response = await articleAPI.deleteArticleByIdRequest(article._id);
     if (response.status === 200) {
-      router.replace(router.asPath);
+      setArticle(null)
     }
+    return response;
   };
+  const onEdit = async (newArticleData:any) => {
+    const response = await articleAPI.editArticleRequest(newArticleData);
+    if (response.status === 200) {
+      setArticle(response.data.article);
+    }
+    return response;
+  }
 
+  if (!article) {
+    return null;
+  } else
   return (
     <>
       <article className={styles.myArticle}>
@@ -44,6 +57,7 @@ const MyArticle = ({ article }: Props) => {
         selectedArticle={article}
         isOpen={isOpen}
         onModalClose={onModalClose}
+        onEdit={onEdit}
       ></MyArticleModal>
     </>
   );

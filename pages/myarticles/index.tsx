@@ -18,7 +18,7 @@ const MyArticles = () => {
 
     const {data:articlesData, error} = useSWR(`/myArticles`, fetcher);
     const articlesDataMapped = articlesData?.map((article:any) => {
-        return <MyArticle key={article._id} article={article}/>
+        return <MyArticle key={article._id} articleData={article}/>
     })
 
     

@@ -11,10 +11,11 @@ interface Props {
     selectedArticle: ArticleDataType;
     isOpen: boolean;
     onModalClose: () => void;
+    onEdit: (data:any) => void;
 }
 
 
-const MyArticleModal = ({selectedArticle, isOpen, onModalClose}:Props) => {
+const MyArticleModal = ({selectedArticle, isOpen, onModalClose, onEdit}:Props) => {
     const router = useRouter();
     const {register, handleSubmit} = useForm();
     const [editMode, setEditMode] = useState(false);
@@ -26,12 +27,9 @@ const MyArticleModal = ({selectedArticle, isOpen, onModalClose}:Props) => {
             newTitle: data.newTitle,
             newBody: data.newBody,
         }
-        const response = await articleAPI.editArticleRequest(newArticleData)
-        if (response.status===200) {
-            setEditMode(false);
-            onModalClose();
-            router.replace(router.asPath);
-        }
+        const response = await onEdit(newArticleData)
+        setEditMode(false);
+        onModalClose();
     }
 
     return (
