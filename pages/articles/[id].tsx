@@ -3,18 +3,21 @@ import instance from "@/utils/axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styles from "./[id].module.css"
+import ArticleDataType from "@/Types/articleDataType";
 
+interface Props {
+    articleData: ArticleDataType
+}
 
-const Article = ({articleData}:any) => {
+const Article = ({articleData}:Props) => {
     const {query} = useRouter();
-    console.log(articleData)
 
     return (
         <>
         <article className={styles.article}>
             <h2>{articleData.title}</h2>
-            <p>Author: {articleData.writer.name}</p>
-            <p>{articleData.body}</p>
+            <p className={styles.author}>{articleData.writer.name ? articleData.writer.name : articleData.writer.email}</p>
+            <p className={styles.body}>{articleData.body}</p>
         </article>
         </>
      );

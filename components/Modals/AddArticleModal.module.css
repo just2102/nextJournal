@@ -1,0 +1,52 @@
+.addArticleModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(85, 83, 83, 0.5);
+}
+.addArticleModal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.addArticleModal label {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.addArticleModal form input, .addArticleModal form textarea {
+    margin: 10px;
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.submit {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit:hover {
+    background-color: #45a049;
+}

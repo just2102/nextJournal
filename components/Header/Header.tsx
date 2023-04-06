@@ -8,7 +8,6 @@ const Header = () => {
     return ( 
         <header className={styles.header}>
             <Link href={"/articles"}>Articles</Link>
-            <Link href={"/writers"}>Writers</Link>
             {session &&
                 <div>
                     <Link href={"/myarticles"}>My Articles</Link>

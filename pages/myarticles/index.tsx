@@ -1,43 +1,44 @@
+import { useRouter } from "next/router";
+import { Modal } from "@mui/material";
+import { useState } from "react";
+import AddArticleModal from "@/components/Modals/AddArticleModal";
+import instance from "@/utils/axios";
+import { useSession } from "next-auth/react";
 import useSWR from "swr";
-import axios from "axios"
-import { useForm } from "react-hook-form";
+import MyArticle from "@/components/MyArticle/MyArticle";
 
-interface Inputs {
-    title: string;
-    body: string;
-    // writer: string;
-    // date: string;
-}
+const fetcher = async (url: string) => {
+  const response = await instance.get(url);
+  return response.data.myArticles;
+};
 
-
-const poster = async(url:string, data:any) => {
-    const response = await axios.post(url, data)
-    return response
-  }
 const MyArticles = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit = async(formInputs:any) => {
-        const newArticle = {
-            title: formInputs.title,
-            body: formInputs.body,
-            writer: "6429820508040081c7eae017",
-            date: Date.now(),
-        }
-        const response = await poster("/api/articles", newArticle);
-        console.log(response);
-    }
+    const router = useRouter();
+    const [addArticleModalOpen, setAddArticleModalOpen] = useState(false);
 
+    const {data:articlesData, error} = useSWR(`/myArticles`, fetcher);
+    const articlesDataMapped = articlesData?.map((article:any) => {
+        return <MyArticle key={article._id} article={article}/>
+    })
+
+    
     return ( 
         <div>
             <h1>My Articles</h1>
             <h3>New article</h3>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Title" {...register("title", {required: true})} />
-                <input type="text" placeholder="Content" {...register("body", {required: true})} />
-                <input type="submit" value={"Post"} />
-            </form>
+            <button onClick={() => setAddArticleModalOpen(true)}>Add article</button>
+            {articlesDataMapped}
+            <Modal
+                aria-labelledby="add new article"
+                aria-describedby="enter title and description to add a new article"
+                open={addArticleModalOpen}
+                onClose={() => setAddArticleModalOpen(false)}
+            >
+                <AddArticleModal />
+            </Modal>
         </div>
      );
 }
+
  
 export default MyArticles;

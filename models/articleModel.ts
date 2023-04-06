@@ -10,8 +10,8 @@ const articleSchema = new mongoose.Schema({
         required: true,
     },
     writer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Writer"
+        type: Object,
+        required: true,
     },
     date: {
         type: Date,
