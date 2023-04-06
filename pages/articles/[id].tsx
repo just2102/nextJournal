@@ -1,5 +1,3 @@
-
-import instance from "@/utils/axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import styles from "./[id].module.css"

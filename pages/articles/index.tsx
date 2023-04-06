@@ -30,7 +30,6 @@ const Articles = ({articlesData}:any) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await instance.get("/articles");
   const articlesData = response.data.articles;
-  console.log(articlesData)
   return {
     props: {
       articlesData,
